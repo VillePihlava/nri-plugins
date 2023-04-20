@@ -69,4 +69,5 @@ usage: ./scripts/run-test.sh
 ## How to setup tracing
 
 * https://github.com/containerd/containerd/blob/main/docs/tracing.md
-* Use port 30001 instead of 4318 when configuring the container runtime for otlp with http
+* Use port 30318 instead of 4318 when configuring the container runtime for otlp with http
+* Use port 30317 instead of 4317 when configuring the container runtime for otlp with grpc
