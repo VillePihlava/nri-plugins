@@ -13,11 +13,24 @@ LABEL_COLORS = {
     "balloons": "blue"
 }
 
+OPERATION_NAME_INDEXES = {
+    "runtime.v1.RuntimeService/RunPodSandbox": 1,
+    "runtime.v1.RuntimeService/CreateContainer": 2,
+    "runtime.v1.RuntimeService/StartContainer": 3,
+    "runtime.v1.RuntimeService/StopContainer": 4,
+    "runtime.v1.RuntimeService/RemoveContainer": 5,
+    "runtime.v1.RuntimeService/StopPodSandbox": 6,
+    "runtime.v1.RuntimeService/RemovePodSandbox": 7
+}
+
 def add_to_subplots_with_color(df, color):
     i = 1
     df_grouped = df.groupby("name")
     for title, group in df_grouped:
-        ax = plt.subplot(4, 2, i)
+        if title in OPERATION_NAME_INDEXES:
+            ax = plt.subplot(4, 2, OPERATION_NAME_INDEXES[title])
+        else:
+            ax = plt.subplot(4, 2, i)
         y_axis_label = group.columns[2]
         group.plot(x="timestamp", y=y_axis_label, ax=ax, legend=True, title=title, color=color)
         ax.set_xlabel("timestamp (seconds)")
